@@ -1,0 +1,3 @@
+lane :test do
+  pxl_build_json
+end
