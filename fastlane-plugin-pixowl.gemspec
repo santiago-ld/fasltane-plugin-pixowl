@@ -2,16 +2,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fastlane/plugin/pxl_build_json/version'
+require 'fastlane/plugin/pixowl/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'fastlane-plugin-pxl_build_json'
-  spec.version       = Fastlane::PxlBuildJson::VERSION
+  spec.name          = 'fastlane-plugin-pixowl'
+  spec.version       = Fastlane::Pixowl::VERSION
   spec.author        = 'sader'
   spec.email         = 'sader@pixowl.com'
 
-  spec.summary       = 'build json'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-pxl_build_json"
+  spec.summary       = 'pixowl plugin'
+  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-pixowl"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)

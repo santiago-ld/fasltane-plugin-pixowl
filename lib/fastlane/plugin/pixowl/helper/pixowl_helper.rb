@@ -4,12 +4,12 @@ module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
 
   module Helper
-    class PxlBuildJsonHelper
+    class PixowlHelper
       # class methods that you define here become available in your action
-      # as `Helper::PxlBuildJsonHelper.your_method`
+      # as `Helper::PixowlHelper.your_method`
       #
       def self.show_message
-        UI.message("Hello from the pxl_build_json plugin helper!")
+        UI.message("Hello from the pixowl plugin helper!")
       end
     end
   end

@@ -1,15 +1,15 @@
 require 'fastlane/action'
-require_relative '../helper/pxl_build_json_helper'
+require_relative '../helper/pixowl_helper'
 
 module Fastlane
   module Actions
-    class PxlBuildJsonAction < Action
+    class PixowlAction < Action
       def self.run(params)
-        UI.message("The pxl_build_json plugin is working!")
+        UI.message("The pixowl plugin is working!")
       end
 
       def self.description
-        "build json"
+        "pixowl plugin"
       end
 
       def self.authors
@@ -22,13 +22,13 @@ module Fastlane
 
       def self.details
         # Optional:
-        ""
+        "A group of actions to build a Pixowl game"
       end
 
       def self.available_options
         [
           # FastlaneCore::ConfigItem.new(key: :your_option,
-          #                         env_name: "PXL_BUILD_JSON_YOUR_OPTION",
+          #                         env_name: "PIXOWL_YOUR_OPTION",
           #                      description: "A description of your option",
           #                         optional: false,
           #                             type: String)
