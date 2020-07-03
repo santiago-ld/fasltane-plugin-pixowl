@@ -13,7 +13,7 @@ module Fastlane
 
       def self.genericCmd(params)
         build_cmd = "#{params[:executable]}"
-        build_cmd << " -projectPath \"#{params[:projectPath]}\"" unless params[:projectPath].nil?
+        build_cmd << " -projectPath \"#{params[:unityProjectPath]}\"" unless params[:unityProjectPath].nil?
         build_cmd << " -quit" if params[:quit]
         build_cmd << " -batchmode" if params[:batchmode]
         build_cmd << " -nographics" if params[:nographics]
@@ -119,7 +119,7 @@ module Fastlane
                              default_value: true,
                                  is_string: false),
 
-          FastlaneCore::ConfigItem.new(key: :projectPath,
+          FastlaneCore::ConfigItem.new(key: :unityProjectPath,
                                   env_name: "FL_UNITY_PROJECT_PATH",
                                description: "Path to Unity project",
                              default_value: "#{Dir.pwd}",

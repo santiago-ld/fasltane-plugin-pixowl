@@ -26,36 +26,33 @@ module Fastlane
         }
 
         jsonPretty = JSON.pretty_generate(json)
-        
-        #UI.message "#{params[:path]} :\n" + jsonPretty
-
-         File.open(params[:jsonGamePath],"w") do |f|
+        File.open(params[:jsonGamePath],"w") do |f|
            f.write(jsonPretty)
-         end
-
-         #JSON BUILD
-
+        end
+       
+        #JSON BUILD
         major = params[:version].split(".")[0].to_i
         minor = params[:version].split(".")[1].to_i
         patch = params[:version].split(".")[2].to_i
+
         json = 
         {
           "storePassword" => params[:storePassword],
           "aliasPassword" => params[:aliasPassword],
+          "keyPath"       => params[:keyPath],
+          "keyAlias"      => params[:keyAlias],
           "outputPath"    => params[:outputPath],
           "outputName"    => params[:outputName],
           "projectPath"   => params[:projectPath],
           "buildAAB"      => params[:buildAAB],
-          "armv8a"        => params[:armv8a]
+          "armv8a"        => params[:armv8a],
+          "exportAsGoogleAndroidProject" => params[:exportAsGoogleAndroidProject]
         }
 
         jsonPretty = JSON.pretty_generate(json)
-        
-        #UI.message "#{params[:path]} :\n" + jsonPretty
-
-         File.open(params[:jsonBuidPath],"w") do |f|
-           f.write(jsonPretty)
-         end
+        File.open(params[:jsonBuildPath],"w") do |f|
+          f.write(jsonPretty)
+        end
 
 
       end
@@ -65,13 +62,11 @@ module Fastlane
       #####################################################
 
       def self.description
-        "A short description with <= 80 characters of what this action does"
+        "generate the build configuration json"
       end
 
       def self.details
-        # Optional:
-        # this is your chance to provide a more detailed description of this action
-        "You can use this action to do cool things..."
+        ""
       end
 
       def self.available_options
@@ -79,7 +74,7 @@ module Fastlane
         
         # Below a few examples
         [
-          FastlaneCore::ConfigItem.new(key: :jsonBuidPath,
+          FastlaneCore::ConfigItem.new(key: :jsonBuildPath,
                                        env_name: "FL_BUILD_JSON_BUILD_PATH", # The name of the environment variable
                                        description: "path to build configuration json", # a short description of this parameter
                                        optional: false,
@@ -95,6 +90,7 @@ module Fastlane
                                        env_name: "FL_BUILD_JSON_ENVIRONMENT", # The name of the environment variable
                                        description: "QA-QA1-DEV-CS-GD-PROD", # a short description of this parameter
                                        default_value: "QA",
+                                       optional: true,
                                        verify_block: proc do |value|
                                           #UI.user_error!("please set environment") unless (value and not value.empty?)
                                           # UI.user_error!("Couldn't find file at path '#{value}'") unless File.exist?(value)
@@ -104,6 +100,7 @@ module Fastlane
                                        env_name: "FL_BUILD_JSON_QA_MENU",
                                        description: "qa menu (cheats)",
                                        default_value: false,
+                                       optional: true,
                                        is_string: false),
 
           FastlaneCore::ConfigItem.new(key: :version,
@@ -119,13 +116,15 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :storePassword,
                                        env_name: "FL_BUILD_JSON_STORE_PASS",
                                        description: "android sign store pass",
-                                       default_value: "",
+                                       default_value: "asd",
                                        optional: true),
+
+
 
           FastlaneCore::ConfigItem.new(key: :aliasPassword,
                                        env_name: "FL_BUILD_JSON_KEY_PASS",
                                        description: "android sign key pass",
-                                       default_value: "",
+                                       default_value: "asd",
                                        optional: true),
 
 
@@ -146,12 +145,12 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :outputPath,
                                        env_name: "FL_BUILD_JSON_OUTPUTPATH",
                                        description: "output path",
-                                       optional: false),
+                                       optional: true),
 
           FastlaneCore::ConfigItem.new(key: :outputName,
                                        env_name: "FL_BUILD_JSON_OUTPUTNAME",
                                        description: "filename",
-                                       optional: false),
+                                       optional: true),
 
           FastlaneCore::ConfigItem.new(key: :projectPath,
                                        env_name: "FL_BUILD_JSON_PROJECTPATH",
@@ -168,7 +167,19 @@ module Fastlane
                                        env_name: "FL_BUILD_JSON_KEYSTORE_ALIAS",
                                        description: "keystore alias",
                                        default_value: "",
-                                       optional: true)
+                                       optional: true),
+
+          FastlaneCore::ConfigItem.new(key: :exportAsGoogleAndroidProject,
+                                       env_name: "FL_BUILD_JSON_EXPORT_ANDROISTUDIO",
+                                       description: "set true to export android version into a androidstudio project",
+                                       default_value: false,
+                                       optional: true,
+                                       is_string: false)
+          
+
+
+
+           
         ]
       end
 
