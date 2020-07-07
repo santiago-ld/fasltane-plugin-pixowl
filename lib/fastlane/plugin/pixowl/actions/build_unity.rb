@@ -161,17 +161,17 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :xcodeProjName,
                                   env_name: "FL_UNITY_XCODE_PROJECT_NAME",
                                description: "xcode ios project name",
-                                  optional: true),
+                                  optional: true)
 
-          FastlaneCore::ConfigItem.new(key: :outputPath,
-                                  env_name: "FL_UNITY_OUTPUT_PATH",
-                               description: "path to the build",
-                                  optional: false),
+          # FastlaneCore::ConfigItem.new(key: :outputPath,
+          #                         env_name: "FL_UNITY_OUTPUT_PATH",
+          #                      description: "path to the build",
+          #                         optional: false),
 
-          FastlaneCore::ConfigItem.new(key: :outputName,
-                                  env_name: "FL_UNITY_OUTPUT_NAME",
-                               description: "filename of the build",
-                                  optional: false),
+          # FastlaneCore::ConfigItem.new(key: :outputName,
+          #                         env_name: "FL_UNITY_OUTPUT_NAME",
+          #                      description: "filename of the build",
+          #                         optional: false),
 
           # FastlaneCore::ConfigItem.new(key: :storePassword,
           #                         env_name: "FL_UNITY_XCODE_STORE_PASS",

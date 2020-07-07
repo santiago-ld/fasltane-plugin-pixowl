@@ -116,7 +116,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :storePassword,
                                        env_name: "FL_BUILD_JSON_STORE_PASS",
                                        description: "android sign store pass",
-                                       default_value: "asd",
+                                       default_value: "",
                                        optional: true),
 
 
@@ -124,7 +124,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :aliasPassword,
                                        env_name: "FL_BUILD_JSON_KEY_PASS",
                                        description: "android sign key pass",
-                                       default_value: "asd",
+                                       default_value: "",
                                        optional: true),
 
 
