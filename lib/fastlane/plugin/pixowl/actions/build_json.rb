@@ -12,6 +12,7 @@ module Fastlane
         major = params[:version].split(".")[0].to_i
         minor = params[:version].split(".")[1].to_i
         patch = params[:version].split(".")[2].to_i
+
         json = 
         {
           "env" => params[:env],
@@ -37,16 +38,17 @@ module Fastlane
 
         json = 
         {
-          "storePassword" => params[:storePassword],
-          "aliasPassword" => params[:aliasPassword],
-          "keyPath"       => params[:keyPath],
-          "keyAlias"      => params[:keyAlias],
-          "outputPath"    => params[:outputPath],
-          "outputName"    => params[:outputName],
-          "projectPath"   => params[:projectPath],
-          "buildAAB"      => params[:buildAAB],
-          "armv8a"        => params[:armv8a],
-          "exportAsGoogleAndroidProject" => params[:exportAsGoogleAndroidProject]
+          "storePassword"                 => params[:storePassword],
+          "aliasPassword"                 => params[:aliasPassword],
+          "keyPath"                       => params[:keyPath],
+          "keyAlias"                      => params[:keyAlias],
+          "outputPath"                    => params[:outputPath],
+          "outputName"                    => params[:outputName],
+          "projectPath"                   => params[:projectPath],
+          "buildAAB"                      => params[:buildAAB],
+          "armv8a"                        => params[:armv8a],
+          "exportAsGoogleAndroidProject"  => params[:exportAsGoogleAndroidProject],
+          "generatedProjOutputPath"       => params[:generatedProjOutputPath]
         }
 
         jsonPretty = JSON.pretty_generate(json)
@@ -174,12 +176,11 @@ module Fastlane
                                        description: "set true to export android version into a androidstudio project",
                                        default_value: false,
                                        optional: true,
-                                       is_string: false)
-          
-
-
-
-           
+                                       is_string: false),
+          FastlaneCore::ConfigItem.new(key: :generatedProjOutputPath,
+                                       env_name: "FL_BUILD_JSON_GENERATED_PROJ_OUTPUT_PATH",
+                                       description: "xcode or androidstudio path to generate, on android only work with exportAsGoogleAndroidProject = true",
+                                       optional: true)
         ]
       end
 
