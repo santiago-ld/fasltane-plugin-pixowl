@@ -7,8 +7,8 @@ module Fastlane
     class ApplyDiffAction < Action
       def self.run(params)
         begin
-          Dir.chdir(pathToApply) do
-            sh "git apply #{diffPath}" 
+          Dir.chdir(params[:pathToApply]) do
+            sh "git apply #{params[:diffPath]}" 
           end
         rescue => ex
          UI.error(ex)
@@ -35,17 +35,17 @@ module Fastlane
         # Below a few examples
         [
     
+
           FastlaneCore::ConfigItem.new(key: :diffPath,
                                        env_name: "FL_APPLY_DIFF_PATH_DIFF",
                                        description: "path to the diff file",
                                        is_string: true, 
-                                       optional: false), 
-
+                                       optional: false),
           FastlaneCore::ConfigItem.new(key: :pathToApply,
                                        env_name: "FL_APPLY_DIFF_PATH_TO_APPLY",
                                        description: "path to apply the .diff",
                                        is_string: true,
-                                       optional: false) 
+                                       optional: false)
         ]
       end
 
