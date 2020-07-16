@@ -77,26 +77,18 @@ module Fastlane
 
       def self.run(params)
         begin
-          sh "cp #{params[:xcode_proj_filepath]} #{params[:xcode_proj_filepath]}.back"#back
+          #sh "cp #{params[:xcode_proj_filepath]} #{params[:xcode_proj_filepath]}.back"#back
           sh "plutil -convert json #{params[:xcode_proj_filepath]}"
           #sh "cp #{params[:xcode_proj_filepath]} #{params[:xcode_proj_filepath]}.back_json" #back json
           file = File.open params[:xcode_proj_filepath]
           
-
-
-
-          
           data = file.read
           file.close
-          
           json = JSON.parse(data)
-
-          jsonPretty =  JSON.pretty_generate(json)
-          File.write("#{params[:xcode_proj_filepath]}.back_json", jsonPretty)
-
+          #jsonPretty =  JSON.pretty_generate(json)
+          #File.write("#{params[:xcode_proj_filepath]}.back_json", jsonPretty)
 
           objects = getObject(json, "objects")
-
 
           keyDataFolderFileRef                = getId(objects,"path" , "Data")
           keyDataFolderFile                   = getId(objects,"fileRef" , keyDataFolderFileRef)
@@ -105,15 +97,7 @@ module Fastlane
           _PBXResourcesBuildPhaseApplication  = getIdInList(json,"files" , keyDataFolderFile)
           _PBXHeadersBuildPhase               = getId(objects,"isa" , "PBXHeadersBuildPhase")
           _PBXResourcesBuildPhaseFramework    = getPBXResourcesBuildPhase(json, _PBXNativeTargetId)
-
-          _NativeCallProxyId                   = getId(objects,"name" , "NativeCallProxy.h")
-
-
-
-          puts "keyDataFolderFileRef: #{keyDataFolderFileRef}"
-          puts "_PBXResourcesBuildPhaseApplication: #{_PBXResourcesBuildPhaseApplication}"
-          puts "keyDataFolderFile: #{keyDataFolderFile}"
-
+          _NativeCallProxyId                  = getId(objects,"name" , "NativeCallProxy.h")
 
           #delete folder data from headers resource build phase list for application
           rbpa = getObject(objects,_PBXResourcesBuildPhaseApplication )
@@ -125,26 +109,16 @@ module Fastlane
           filesrbpf =  getObject(rbpf,"files" )
           filesrbpf.push(keyDataFolderFile)
 
-
-          puts "_PBXHeadersBuildPhase: #{_PBXHeadersBuildPhase}"
-          puts "keyProductFramework: #{_PBXNativeTargetId}"
-          puts "keyProductApplication: #{keyProductApplication}"
-          puts "_PBXResourcesBuildPhaseFramework : #{_PBXResourcesBuildPhaseFramework}"
-
           newId = generateID()
-
           fileHeaderBuildPhase = getObject(objects, _PBXHeadersBuildPhase)
           fileHeaderBuildPhaseListFiles = getObject(fileHeaderBuildPhase, "files")
           fileHeaderBuildPhaseListFiles.push(newId)
-
-
-
           fileObj = createPBXBuildFileObject(newId, _NativeCallProxyId)
-          puts fileObj.to_json
+          # puts fileObj.to_json
           objects.merge!(fileObj)
 
-          jsonPretty =  JSON.pretty_generate(json)
-          File.write("#{params[:xcode_proj_filepath]}.exported", jsonPretty)
+          #jsonPretty =  JSON.pretty_generate(json)
+          File.write("#{params[:xcode_proj_filepath]}", json)
 
 
         rescue => ex
