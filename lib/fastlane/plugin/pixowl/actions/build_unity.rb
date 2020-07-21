@@ -123,7 +123,7 @@ module Fastlane
                                   env_name: "FL_UNITY_PROJECT_PATH",
                                description: "Path to Unity project",
                              default_value: "#{Dir.pwd}",
-                                  optional: true),
+                                  optional: false),
 
           FastlaneCore::ConfigItem.new(key: :quit,
                                   env_name: "FL_UNITY_QUIT",
