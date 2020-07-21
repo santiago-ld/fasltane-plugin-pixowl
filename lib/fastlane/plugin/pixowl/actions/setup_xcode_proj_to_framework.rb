@@ -79,6 +79,7 @@ module Fastlane
         begin
           #sh "cp #{params[:xcode_proj_filepath]} #{params[:xcode_proj_filepath]}.back"#back
           sh "plutil -convert json #{params[:xcode_proj_filepath]}"
+          UI.message("setupXcode json parser begin")
           #sh "cp #{params[:xcode_proj_filepath]} #{params[:xcode_proj_filepath]}.back_json" #back json
           file = File.open params[:xcode_proj_filepath]
           
@@ -120,6 +121,7 @@ module Fastlane
           jsonPretty =  JSON.pretty_generate(json)
           File.write("#{params[:xcode_proj_filepath]}", jsonPretty)
 
+          UI.message("setupXcode json parser end")
 
         rescue => ex
           UI.error(ex)
