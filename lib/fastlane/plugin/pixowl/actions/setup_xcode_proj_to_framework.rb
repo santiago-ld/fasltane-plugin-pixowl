@@ -117,8 +117,8 @@ module Fastlane
           # puts fileObj.to_json
           objects.merge!(fileObj)
 
-          #jsonPretty =  JSON.pretty_generate(json)
-          File.write("#{params[:xcode_proj_filepath]}", json)
+          jsonPretty =  JSON.pretty_generate(json)
+          File.write("#{params[:xcode_proj_filepath]}", jsonPretty)
 
 
         rescue => ex
