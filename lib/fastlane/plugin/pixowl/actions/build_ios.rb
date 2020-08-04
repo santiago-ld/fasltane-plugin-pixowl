@@ -8,18 +8,19 @@ module Fastlane
       def self.run(params)
         export_method = params[:export_list].shift
 
-        other_action.build_app scheme: "Unity-iPhone",
+        other_action.build_app scheme:params[:scheme],
           project: "#{params[:project]}",
           output_directory: "#{params[:output_path]}/ipa", 
           buildlog_path: "#{params[:output_path]}/log",
           output_name: "#{params[:output_name]}_#{export_method}",
-          configuration: "Release",
+          configuration: params[:configuration],
           export_xcargs: "-allowProvisioningUpdates",
           xcargs: "-allowProvisioningUpdates",
           clean: params[:clean],
           archive_path:"#{params[:output_path]}/archive/#{params[:output_name]}",
           export_method: export_method,
           include_bitcode: false,
+          xcargs: params[:xcargs],
           export_options: 
           {
             uploadBitcode: false,
@@ -30,17 +31,18 @@ module Fastlane
         params[:export_list].each {
           |export_method_it| 
           UI.message "\tParameter export_to: #{export_method_it}"
-          other_action.build_app scheme: "Unity-iPhone",
+          other_action.build_app scheme:params[:scheme],
             project: "#{params[:project]}",
             output_directory: "#{params[:output_path]}/ipa", 
             buildlog_path: "#{params[:output_path]}/log",
             output_name: "#{params[:output_name]}_#{export_method_it}",
-            configuration: "Release",
+            configuration: params[:configuration],
             clean: params[:clean],
             archive_path:"#{params[:output_path]}/archive/#{params[:output_name]}",
             export_method: export_method_it,
             include_bitcode: false,
             skip_build_archive: true,
+            xcargs: params[:xcargs],
             export_options: 
             {
               uploadBitcode: false,
