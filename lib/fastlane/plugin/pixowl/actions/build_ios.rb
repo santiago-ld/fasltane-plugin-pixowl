@@ -93,11 +93,30 @@ module Fastlane
                                        env_name: "FL_BUILD_IOS_OUTPUT_NAME", 
                                        description: "path to xcode project",
                                        optional: false),
+
+          FastlaneCore::ConfigItem.new(key: :scheme,
+                                       env_name: "FL_BUILD_IOS_SCHEME", 
+                                       description: "sheme name",
+                                       default: "Unity-iPhone",
+                                       optional: true),
+          FastlaneCore::ConfigItem.new(key: :configuration,
+                                       env_name: "FL_BUILD_IOS_CONFIGURATION", 
+                                       description: "configuration name",
+                                       default: "Release",
+                                       optional: true),
           FastlaneCore::ConfigItem.new(key: :export_list,
                                        env_name: "FL_BUILD_IOS_EXPORT_LIST",
                                        description: "clean before build?",
                                        type: Array,
                                        optional: true),
+        FastlaneCore::ConfigItem.new(key: :xcargs,
+                                       env_name: "FL_BUILD_IOS_XCARGS", 
+                                       description: "defines",
+                                       optional: true)
+      
+
+
+
         ]
       end
 
