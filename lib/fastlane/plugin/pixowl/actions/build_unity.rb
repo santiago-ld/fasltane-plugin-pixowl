@@ -20,8 +20,8 @@ module Fastlane
       #  build_cmd << " -outputPath \"#{params[:outputPath]}\"" unless params[:outputPath].nil?
       #  build_cmd << " -outputName \"#{params[:outputName]}\"" unless params[:outputName].nil?
 
-        # build_cmd << " -username \"#{params[:username]}\"" unless params[:username].nil?
-        # build_cmd << " -password \"#{params[:password]}\"" unless params[:password].nil?  
+        build_cmd << " -username \"#{params[:username]}\"" unless params[:username].nil?
+        build_cmd << " -password \"#{params[:password]}\"" unless params[:password].nil?  
         # build_cmd << " -env \"#{params[:env]}\"" unless params[:env].nil?
         # build_cmd << " -version \"#{params[:version]}\"" unless params[:version].nil?
         # build_cmd << " -logfile #{params[:logFile]}"
@@ -163,10 +163,16 @@ module Fastlane
                                description: "xcode ios project name",
                                   optional: true)
 
-          # FastlaneCore::ConfigItem.new(key: :outputPath,
-          #                         env_name: "FL_UNITY_OUTPUT_PATH",
-          #                      description: "path to the build",
-          #                         optional: false),
+           FastlaneCore::ConfigItem.new(key: :username,
+                                   env_name: "FL_UNITY_USER",
+                                description: "unity user",
+                                   optional: true),
+
+           FastlaneCore::ConfigItem.new(key: :password,
+                                   env_name: "FL_UNITY_PASSWORD",
+                                description: "unity password",
+                                   optional: true)
+
 
           # FastlaneCore::ConfigItem.new(key: :outputName,
           #                         env_name: "FL_UNITY_OUTPUT_NAME",
