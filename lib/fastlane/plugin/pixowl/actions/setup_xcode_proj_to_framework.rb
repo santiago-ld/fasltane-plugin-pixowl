@@ -124,7 +124,7 @@ module Fastlane
           UI.message("setupXcode json parser end")
 
         rescue => ex
-          UI.error(ex)
+          UI.error("setupXcode json parser error: #{ex}")
         end
       end
 
