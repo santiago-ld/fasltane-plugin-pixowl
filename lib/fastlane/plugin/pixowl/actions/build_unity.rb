@@ -161,7 +161,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :xcodeProjName,
                                   env_name: "FL_UNITY_XCODE_PROJECT_NAME",
                                description: "xcode ios project name",
-                                  optional: true)
+                                  optional: true),
 
            FastlaneCore::ConfigItem.new(key: :username,
                                    env_name: "FL_UNITY_USER",
