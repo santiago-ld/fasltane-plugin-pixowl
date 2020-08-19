@@ -17,6 +17,7 @@ module Fastlane
         {
           "env" => params[:env],
           "qaMenu" => params[:qaMenu],
+          "unityStandalone" => params[:unityStandalone],
           "buildVersion" => params[:buildVersion].to_i,
           "version" => 
           {
@@ -105,6 +106,13 @@ module Fastlane
                                        optional: true,
                                        is_string: false),
 
+          FastlaneCore::ConfigItem.new(key: :unityStandalone,
+                                       env_name: "FL_BUILD_JSON_UNITY_STANDALONE",
+                                       description: "unityStandalone",
+                                       default_value: false,
+                                       optional: true,
+                                       is_string: false),
+
           FastlaneCore::ConfigItem.new(key: :version,
                                        env_name: "FL_BUILD_JSON_VERSION",
                                        description: "the string version",
@@ -120,8 +128,6 @@ module Fastlane
                                        description: "android sign store pass",
                                        default_value: "",
                                        optional: true),
-
-
 
           FastlaneCore::ConfigItem.new(key: :aliasPassword,
                                        env_name: "FL_BUILD_JSON_KEY_PASS",
