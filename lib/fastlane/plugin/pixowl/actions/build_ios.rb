@@ -109,7 +109,7 @@ module Fastlane
                                        description: "clean before build?",
                                        type: Array,
                                        optional: true),
-        FastlaneCore::ConfigItem.new(key: :xcargs,
+          FastlaneCore::ConfigItem.new(key: :xcargs,
                                        env_name: "FL_BUILD_IOS_XCARGS", 
                                        description: "defines",
                                        optional: true)
