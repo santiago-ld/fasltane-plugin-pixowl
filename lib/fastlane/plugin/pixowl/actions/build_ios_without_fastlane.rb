@@ -66,7 +66,7 @@ module Fastlane
             optional: true),
           FastlaneCore::ConfigItem.new(
             key: :gameName,
-            env_name: "FL_BUILD_IOS_WITHOUT_FASTLANE_GAME_NAME" 
+            env_name: "FL_BUILD_IOS_WITHOUT_FASTLANE_GAME_NAME" ,
             description: "game name",
             optional: false),          
           FastlaneCore::ConfigItem.new(
