@@ -18,6 +18,7 @@ module Fastlane
           buildVersion      = params[:buildVersion]
           version           = params[:version]
           buildScripts      = params[:buildScripts]
+          gameName          = params[:gameName]
 
           if params[:clean]
             clean       = "clean=yes" 
@@ -29,7 +30,7 @@ module Fastlane
 
           params[:exportList].each {
             |export_method_it| 
-            sh "#{buildScripts}/#4_package.sh citybuilder #{export_method_it} #{outputName} #{buildVersion} #{version}"
+            sh "#{buildScripts}/#4_package.sh #{gameName} #{export_method_it} #{outputName} #{buildVersion} #{version}"
           }
         rescue => ex
           UI.error(ex)
@@ -63,6 +64,11 @@ module Fastlane
             description: "scheme to build",
             default_value: "Unity-iPhone",
             optional: true),
+          FastlaneCore::ConfigItem.new(
+            key: :gameName,
+            env_name: "FL_BUILD_IOS_WITHOUT_FASTLANE_GAME_NAME" 
+            description: "game name",
+            optional: false),          
           FastlaneCore::ConfigItem.new(
             key: :workspacePath,
             env_name: "FL_BUILD_IOS_WITHOUT_FASTLANE_WORKSPACE_PATH", 
