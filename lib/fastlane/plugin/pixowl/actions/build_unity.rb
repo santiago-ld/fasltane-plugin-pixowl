@@ -6,40 +6,28 @@ module Fastlane
 
     class BuildUnityAction < Action
 
-      # def self.printParams(params)
-     
-      #   UI.log()
-      # end
-
       def self.genericCmd(params)
         build_cmd = "#{params[:executable]}"
         build_cmd << " -projectPath \"#{params[:unityProjectPath]}\"" unless params[:unityProjectPath].nil?
         build_cmd << " -quit" if params[:quit]
         build_cmd << " -batchmode" if params[:batchmode]
         build_cmd << " -nographics" if params[:nographics]
-      #  build_cmd << " -outputPath \"#{params[:outputPath]}\"" unless params[:outputPath].nil?
-      #  build_cmd << " -outputName \"#{params[:outputName]}\"" unless params[:outputName].nil?
-
         build_cmd << " -username \"#{params[:username]}\"" unless params[:username].nil?
         build_cmd << " -password \"#{params[:password]}\"" unless params[:password].nil?  
-        # build_cmd << " -env \"#{params[:env]}\"" unless params[:env].nil?
-        # build_cmd << " -version \"#{params[:version]}\"" unless params[:version].nil?
-        # build_cmd << " -logfile #{params[:logFile]}"
-
         build_cmd << " -logfile"
         build_cmd
       end
 
       def self.androidCmd(params)
         build_cmd = genericCmd(params)
-        #build_cmd << " -storePassword \"#{params[:storePassword]}\"" unless params[:storePassword].nil?
-        #build_cmd << " -keyPassword \"#{params[:keyPassword]}\"" unless params[:keyPassword].nil?
+        build_cmd << " -buildTarget Android" 
         build_cmd << " -executeMethod buildUtil.PerformBuildAndroid"
         build_cmd
       end
 
       def self.iosCmd(params)
         build_cmd = genericCmd(params)
+        build_cmd << " -buildTarget iOS" 
         build_cmd << " -projectName \"#{params[:xcodeProjName]}\"" unless params[:xcodeProjName].nil?
         build_cmd << " -executeMethod buildUtil.PerformBuildiOs"
         build_cmd
@@ -172,22 +160,6 @@ module Fastlane
                                    env_name: "FL_UNITY_PASSWORD",
                                 description: "unity password",
                                    optional: true)
-
-
-          # FastlaneCore::ConfigItem.new(key: :outputName,
-          #                         env_name: "FL_UNITY_OUTPUT_NAME",
-          #                      description: "filename of the build",
-          #                         optional: false),
-
-          # FastlaneCore::ConfigItem.new(key: :storePassword,
-          #                         env_name: "FL_UNITY_XCODE_STORE_PASS",
-          #                      description: "android sign store pass",
-          #                         optional: true),
-
-          # FastlaneCore::ConfigItem.new(key: :keyPassword,
-          #                         env_name: "FL_UNITY_XCODE_KEY_PASS",
-          #                      description: "android sign key pass",
-          #                         optional: true)
         ]
       end
 
