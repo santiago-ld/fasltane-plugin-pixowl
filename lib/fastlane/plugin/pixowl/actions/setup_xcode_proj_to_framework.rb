@@ -85,10 +85,6 @@ module Fastlane
           
           data = file.read
           file.close
-
-          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho Upload Dsym end.'
-          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho Upload Dsym end.'
-
           json = JSON.parse(data)
           #jsonPretty =  JSON.pretty_generate(json)
           #File.write("#{params[:xcode_proj_filepath]}.back_json", jsonPretty)
@@ -101,26 +97,8 @@ module Fastlane
           keyProductApplication               = getId(objects,"productType" , "com.apple.product-type.application")
           _PBXResourcesBuildPhaseApplication  = getIdInList(json,"files" , keyDataFolderFile)
           _PBXHeadersBuildPhase               = getId(objects,"isa" , "PBXHeadersBuildPhase")
-          #_PBXShellScriptBuildPhases           = getId(objects, "shellScript", "$PROJECT_DIR/process_symbols.sh")
-
-
-
           _PBXResourcesBuildPhaseFramework    = getPBXResourcesBuildPhase(json, _PBXNativeTargetId)
           _NativeCallProxyId                  = getId(objects,"name" , "NativeCallProxy.h")
-
-
-
-
-          #
-          #puts _PBXShellScriptBuildPhases
-        #   _PBXShellScriptBuildPhases.each do |key|
-        #   _PBXShellScriptBuildPhase = getObject(obj, key)
-        #   isa =  getObject(phase, "isa")
-        #   if (isa == "PBXResourcesBuildPhase")
-        #     return key
-        #   end
-        # end
-
 
           #delete folder data from headers resource build phase list for application
           rbpa = getObject(objects,_PBXResourcesBuildPhaseApplication )
@@ -141,11 +119,7 @@ module Fastlane
           objects.merge!(fileObj)
 
           jsonPretty =  JSON.pretty_generate(json)
-         
-
-
-
-         File.write("#{params[:xcode_proj_filepath]}", jsonPretty)
+          File.write("#{params[:xcode_proj_filepath]}", jsonPretty)
 
           UI.message("setupXcode json parser end")
 
