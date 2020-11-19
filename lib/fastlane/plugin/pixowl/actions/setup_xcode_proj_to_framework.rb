@@ -86,8 +86,8 @@ module Fastlane
           data = file.read
           file.close
 
-          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho Upload Dsym end.'
-          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho Upload Dsym end.'
+          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho "Upload Dsym end.'
+          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM\"\necho "Upload Dsym end.'
 
           json = JSON.parse(data)
           #jsonPretty =  JSON.pretty_generate(json)
