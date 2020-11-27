@@ -85,6 +85,10 @@ module Fastlane
           
           data = file.read
           file.close
+
+          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM'
+          data.sub! "process_symbols.sh", 'usymtool\" -symbolPath \"../../build/archive.xcarchive/dSYMs/UnityFramework.framework.dSYM'
+
           json = JSON.parse(data)
           #jsonPretty =  JSON.pretty_generate(json)
           #File.write("#{params[:xcode_proj_filepath]}.back_json", jsonPretty)
