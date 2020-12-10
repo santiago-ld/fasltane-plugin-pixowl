@@ -17,6 +17,7 @@ module Fastlane
         {
           "env" => params[:env],
           "qaMenu" => params[:qaMenu],
+          "gdMenu" => params[:gdMenu],
           "unityStandalone" => params[:unityStandalone],
           "buildVersion" => params[:buildVersion].to_i,
           "version" => 
@@ -102,6 +103,13 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :qaMenu,
                                        env_name: "FL_BUILD_JSON_QA_MENU",
                                        description: "qa menu (cheats)",
+                                       default_value: false,
+                                       optional: true,
+                                       is_string: false),
+
+          FastlaneCore::ConfigItem.new(key: :gdMenu,
+                                       env_name: "FL_BUILD_JSON_GD_MENU",
+                                       description: "gd menu (cheats)",
                                        default_value: false,
                                        optional: true,
                                        is_string: false),
