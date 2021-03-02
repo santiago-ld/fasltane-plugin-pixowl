@@ -47,6 +47,7 @@ module Fastlane
           "outputName"                    => params[:outputName],
           "projectPath"                   => params[:projectPath],
           "buildAAB"                      => params[:buildAAB],
+          "startingBundle"                => params[:startingBundle],
           "armv8a"                        => params[:armv8a],
           "exportAsGoogleAndroidProject"  => params[:exportAsGoogleAndroidProject],
           "generatedProjOutputPath"       => params[:generatedProjOutputPath]
@@ -139,6 +140,13 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :buildAAB,
                                        env_name: "FL_BUILD_JSON_BUILD_AAB",
                                        description: "aab",
+                                       default_value: false,
+                                       optional: true,
+                                       is_string: false),
+
+          FastlaneCore::ConfigItem.new(key: :startingBundle,
+                                       env_name: "FL_BUILD_JSON_STARTING_BUNDLE",
+                                       description: "generates and uses an starting assets bundle, or not",
                                        default_value: false,
                                        optional: true,
                                        is_string: false),
