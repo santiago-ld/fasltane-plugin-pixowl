@@ -37,21 +37,38 @@ module Fastlane
         minor = params[:version].split(".")[1].to_i
         patch = params[:version].split(".")[2].to_i
 
-        json = 
-        {
-          "storePassword"                 => params[:storePassword],
-          "aliasPassword"                 => params[:aliasPassword],
-          "keyPath"                       => params[:keyPath],
-          "keyAlias"                      => params[:keyAlias],
-          "outputPath"                    => params[:outputPath],
-          "outputName"                    => params[:outputName],
-          "projectPath"                   => params[:projectPath],
-          "buildAAB"                      => params[:buildAAB],
-          "startingBundle"                => params[:startingBundle],
-          "armv8a"                        => params[:armv8a],
-          "exportAsGoogleAndroidProject"  => params[:exportAsGoogleAndroidProject],
-          "generatedProjOutputPath"       => params[:generatedProjOutputPath]
-        }
+        if ( params[:startingBundle] == "true" )
+          json = 
+          {
+            "storePassword"                 => params[:storePassword],
+            "aliasPassword"                 => params[:aliasPassword],
+            "keyPath"                       => params[:keyPath],
+            "keyAlias"                      => params[:keyAlias],
+            "outputPath"                    => params[:outputPath],
+            "outputName"                    => params[:outputName],
+            "projectPath"                   => params[:projectPath],
+            "buildAAB"                      => params[:buildAAB],
+            "startingBundle"                => params[:startingBundle],
+            "armv8a"                        => params[:armv8a],
+            "exportAsGoogleAndroidProject"  => params[:exportAsGoogleAndroidProject],
+            "generatedProjOutputPath"       => params[:generatedProjOutputPath]
+          }
+        else
+          json = 
+          {
+            "storePassword"                 => params[:storePassword],
+            "aliasPassword"                 => params[:aliasPassword],
+            "keyPath"                       => params[:keyPath],
+            "keyAlias"                      => params[:keyAlias],
+            "outputPath"                    => params[:outputPath],
+            "outputName"                    => params[:outputName],
+            "projectPath"                   => params[:projectPath],
+            "buildAAB"                      => params[:buildAAB],
+            "armv8a"                        => params[:armv8a],
+            "exportAsGoogleAndroidProject"  => params[:exportAsGoogleAndroidProject],
+            "generatedProjOutputPath"       => params[:generatedProjOutputPath]
+          }
+        end
 
         jsonPretty = JSON.pretty_generate(json)
         File.open(params[:jsonBuildPath],"w") do |f|
